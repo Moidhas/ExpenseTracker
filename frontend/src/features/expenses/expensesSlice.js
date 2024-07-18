@@ -14,7 +14,7 @@ export const expensesSlice = createSlice({
         }),
         putExpenses: (state, action) => ({
             ...state,
-            expenses: state.expenses.filter(exp => exp.id !== action.payload.id).push(action.payload),
+            expenses: state.expenses.filter(exp => exp.id !== action.payload.id).concat(action.payload),
         }),
         postExpenses: (state, action) => ({
             ...state,

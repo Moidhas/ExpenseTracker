@@ -1,19 +1,24 @@
-import React, { useEffect, useState } from 'react';
-import { GetExpenses, PutExpense, PostExpense, DeleteExpense } from './expensesApi';
-import { useSelector, useDispatch } from 'react-redux';
+import React, { useState } from 'react';
+import { PutExpense, PostExpense } from './expensesApi';
+import { useDispatch } from 'react-redux';
 import { Button, Row, Col, Form } from 'react-bootstrap';
 
 
- export default function ExpensesForm() {
+ export default function ExpensesForm({ expense={ price: 0, desc: "" }, onEdit }) {
     const dispatch = useDispatch();
-    const [formExpense, setFormExpense] = useState({ price: 0, desc: "" });
+    const [formExpense, setFormExpense] = useState(expense);
     const handleChange = (e) => {
         const { name, value } = e.target;
         setFormExpense( (state) => ( { ...state, [name]: value } ));
     };
     const handleSubmit = (e) => {
         e.preventDefault();
-        PostExpense(dispatch, formExpense);
+        if (onEdit === undefined) {
+            PostExpense(dispatch, formExpense);
+        } else {
+            PutExpense(dispatch, formExpense);
+            onEdit();
+        }
     };
     return (
         <Form onSubmit={handleSubmit} style={{marginBottom: '2rem', marginTop: '2rem' }}>
@@ -30,7 +35,7 @@ import { Button, Row, Col, Form } from 'react-bootstrap';
                         <input type="number" name='price' value={formExpense.price} onChange={handleChange}  />
                     </label>
                 </Col>
-                <Col> <Button type='submit' variant='primary'>Add</Button> </Col>
+                <Col> <Button type='submit' variant='primary'>Submit</Button> </Col>
             </Row>
         </Form>
     );
