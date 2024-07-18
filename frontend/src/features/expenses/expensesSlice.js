@@ -22,7 +22,7 @@ export const expensesSlice = createSlice({
         }),
         deleteExpenses: (state, action) => ({
             ...state,
-            expenses: state.expenses.filter(exp => exp.id != action.payload.id)
+            expenses: state.expenses.filter(exp => exp.id !== action.payload.id)
         }),
     },
 });

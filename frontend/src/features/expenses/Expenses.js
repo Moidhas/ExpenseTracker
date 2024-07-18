@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { GetExpenses, PutExpense, PostExpense, DeleteExpense } from './expensesApi';
+import { GetExpenses } from './expensesApi';
 import { useSelector, useDispatch } from 'react-redux';
 import { Button, Row, Col } from 'react-bootstrap';
 
@@ -10,6 +10,8 @@ function Expense({ expense }) {
             <Row> 
                 <Col> { expense.desc }  </Col>
                 <Col> { expense.price } </Col>
+                <Col> <Button variant='primary'>Edit</Button> </Col>
+                <Col> <Button variant='primary'>Delete</Button> </Col>
             </Row>
             <hr />
         </div>

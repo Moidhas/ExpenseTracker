@@ -1,4 +1,4 @@
-import expensesReducer, { getExpenses, putExpenses, postExpenses, deleteExpenses } from './expensesSlice'
+import { getExpenses, putExpenses, postExpenses, deleteExpenses } from './expensesSlice'
 
 export function GetExpenses(dispatch) {
     // Api call 
@@ -15,12 +15,11 @@ export function PutExpense(dispatch, expense) {
 
 export function PostExpense(dispatch, expense) {
     // Api Call
-    dispatch(postExpenses(expense))
+    const id = 19;
+    dispatch(postExpenses({...expense, id: id}))
 }
 
 export function DeleteExpense(dispatch, expense) {
     // Api Call
     dispatch(deleteExpenses(expense))
 }
-
-
